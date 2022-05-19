@@ -46,4 +46,5 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
     //               الاعدادات العامة
     //************************************************
 
+    route::resource('clinic', 'ClinicController');
 });

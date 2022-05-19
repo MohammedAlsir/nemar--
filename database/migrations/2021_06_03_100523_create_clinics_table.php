@@ -18,7 +18,7 @@ class CreateClinicsTable extends Migration
             $table->string('clinic_name');
             $table->string('avatar')->nullable();
             $table->string('phone')->nullable();
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->string('Address');
             $table->timestamps();
         });

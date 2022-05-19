@@ -40,6 +40,34 @@
                             </a>
                         </li> --}}
 
+                        {{-- clinic --}}
+
+                        <li class="nav-item has-treeview  @yield('sections_open')">
+                            <a href="#" class="nav-link @yield('sections')">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                المستشفيات
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                            </a>
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item">
+                                    <a href="{{route('clinic.index')}}" class="nav-link @yield('clinic_index')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>كل المستشفيات</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('clinic.create')}}" class="nav-link @yield('clinic_create')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>إضافة مستشفى جديد</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
 
                     </ul>
                 </nav>
