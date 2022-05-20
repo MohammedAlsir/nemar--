@@ -73,8 +73,8 @@
         </div>
       </form>
        <div class="social-auth-links text-center mb-3">
-            <p>- كل الحقوق محفوظة   -</p>
-            <p class="small">7D Company Copyright © 2022</p>
+            {{-- <p>- كل الحقوق محفوظة   -</p> --}}
+            {{-- <p class="small">7D Company Copyright © 2022</p> --}}
 
         </div>
     </div>

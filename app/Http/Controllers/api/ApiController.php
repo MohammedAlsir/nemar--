@@ -7,6 +7,7 @@ use App\Http\Requests\Hosptal;
 use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Patient;
+use App\Models\Reservation;
 use App\Models\Specialties;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -238,5 +239,65 @@ class ApiController extends Controller
         }
         //
 
+    }
+
+    // reservations
+    public function reservations(Request $request)
+    {
+        if (auth()->user()->role == 'sick') {
+            $data = $request->validate([
+
+                'patient_id' => 'required',
+                'doctor_id' => 'required',
+                'date' => 'required',
+            ]);
+
+            $reservation = new Reservation();
+            $reservation->patient_id = $request->patient_id;
+            $reservation->doctor_id = $request->doctor_id;
+            $reservation->date = $request->date;
+
+            $reservation->save();
+
+
+            return response()->json([
+                'reservation' => $reservation,
+                'error' => false,
+                'message_en' => '',
+                'message_ar' => ''
+            ], 200);
+        } else {
+            return response()->json([
+                'error'     => true,
+                'message_en'   => 'Unauthorised ,Sorry, you do not have access to this page ',
+                'message_ar'   => 'عفوا ، ليس لديك صلاحيات الوصول إلى هذه الصفحة',
+            ], 200);
+        }
+    }
+
+    // all_reservations
+
+    public function all_reservations($id)
+    {
+        if (auth()->user()->role == 'sick') {
+            $all_reservation = Reservation::where('patient_id', $id)->orderBy('id', 'desc')->get();
+
+            // foreach ($users as $user) {
+            //     $user->setAttribute('added_at', $user->created_at->diffForHumans());
+            // }
+
+            return response()->json([
+                'all_reservation' => $all_reservation,
+                'error' => false,
+                'message_en' => '',
+                'message_ar' => ''
+            ], 200);
+        } else {
+            return response()->json([
+                'error'     => true,
+                'message_en'   => 'Unauthorised ,Sorry, you do not have access to this page ',
+                'message_ar'   => 'عفوا ، ليس لديك صلاحيات الوصول إلى هذه الصفحة',
+            ], 200);
+        }
     }
 }

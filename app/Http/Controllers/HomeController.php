@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
+use App\Models\Hospital;
+use App\Models\Patient;
+use App\Models\Specialties;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $hospital = Hospital::count();
+        $Specialties = Specialties::count();
+        $Doctor = Doctor::count();
+        $Patient = Patient::count();
+        return view('home', compact(
+            'hospital',
+            'Specialties',
+            'Doctor',
+            'Patient'
+        ));
     }
 }

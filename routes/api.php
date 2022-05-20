@@ -26,6 +26,10 @@ Route::namespace('App\Http\Controllers\api')->group(function () {
     Route::get('specialties', 'ApiController@specialties')->middleware('auth:api');
     Route::get('doctor/{hospital}/{specialties}', 'ApiController@doctor')->middleware('auth:api');
 
+    Route::post('reservations', 'ApiController@reservations')->middleware('auth:api');
+
+    Route::get('reservations/{id}', 'ApiController@all_reservations')->middleware('auth:api');
+
 
     // profile
 });
