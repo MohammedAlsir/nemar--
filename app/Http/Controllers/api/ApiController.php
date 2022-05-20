@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Hosptal;
+use App\Models\Doctor;
+use App\Models\Hospital;
 use App\Models\Patient;
+use App\Models\Specialties;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -149,5 +153,90 @@ class ApiController extends Controller
             ], 200);
         }
         //End Edit  User Data
+    }
+
+    // get all hospital
+    public function hospital()
+    {
+        //
+        if (auth()->user()->role == 'sick') {
+            $hospital = Hospital::orderBy('id', 'desc')->get();
+
+            // foreach ($users as $user) {
+            //     $user->setAttribute('added_at', $user->created_at->diffForHumans());
+            // }
+
+            return response()->json([
+                'hospital' => $hospital,
+                'error' => false,
+                'message_en' => '',
+                'message_ar' => ''
+            ], 200);
+        } else {
+            return response()->json([
+                'error'     => true,
+                'message_en'   => 'Unauthorised ,Sorry, you do not have access to this page ',
+                'message_ar'   => 'عفوا ، ليس لديك صلاحيات الوصول إلى هذه الصفحة',
+            ], 200);
+        }
+        //
+
+    }
+
+    // get all specialties
+    public function specialties()
+    {
+        //
+        if (auth()->user()->role == 'sick') {
+            $specialties = Specialties::orderBy('id', 'desc')->get();
+
+            // foreach ($users as $user) {
+            //     $user->setAttribute('added_at', $user->created_at->diffForHumans());
+            // }
+
+            return response()->json([
+                'specialties' => $specialties,
+                'error' => false,
+                'message_en' => '',
+                'message_ar' => ''
+            ], 200);
+        } else {
+            return response()->json([
+                'error'     => true,
+                'message_en'   => 'Unauthorised ,Sorry, you do not have access to this page ',
+                'message_ar'   => 'عفوا ، ليس لديك صلاحيات الوصول إلى هذه الصفحة',
+            ], 200);
+        }
+        //
+
+    }
+
+
+    // get doctors
+    public function doctor($hospital, $specialties)
+    {
+        //
+        if (auth()->user()->role == 'sick') {
+            $doctor = Doctor::where('hospital_id', $hospital)->where('specialtie_id', $specialties)->orderBy('id', 'desc')->get();
+
+            // foreach ($users as $user) {
+            //     $user->setAttribute('added_at', $user->created_at->diffForHumans());
+            // }
+
+            return response()->json([
+                'doctor' => $doctor,
+                'error' => false,
+                'message_en' => '',
+                'message_ar' => ''
+            ], 200);
+        } else {
+            return response()->json([
+                'error'     => true,
+                'message_en'   => 'Unauthorised ,Sorry, you do not have access to this page ',
+                'message_ar'   => 'عفوا ، ليس لديك صلاحيات الوصول إلى هذه الصفحة',
+            ], 200);
+        }
+        //
+
     }
 }
