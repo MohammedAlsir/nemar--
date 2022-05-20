@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','بيانات المستشفى')
-@section('clinic_open','menu-open')
-@section('clinic','active')
+@section('hospital_open','menu-open')
+@section('hospital','active')
 @section('content')
 
 <section class="content">
@@ -12,11 +12,11 @@
                 <!-- Horizontal Form -->
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">تعديل بيانات قسم {{$clinic->name}} </h3>
+                        <h3 class="card-title">تعديل بيانات مستشفى {{$item->name}} </h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="POST" action="{{route('clinic.update',$clinic->id)}}" class="form-horizontal">
+                    <form method="POST" action="{{route('hospital.update',$item->id)}}" class="form-horizontal">
                         @csrf
                         @method('put')
                         <div class="card-body">
@@ -24,13 +24,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label">اسم المستشفى  </label>
                                 <div class="col-sm-10">
-                                    <input required type="text" value="{{$clinic->clinic_name}}" class="form-control" name="clinic_name">
+                                    <input required type="text" value="{{$item->name}}" class="form-control" name="name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label">العنوان</label>
                                 <div class="col-sm-10">
-                                    <input required type="text" class="form-control" value="{{$clinic->Address}}" name="Address">
+                                    <input required type="text" class="form-control" value="{{$item->location}}" name="location">
                                 </div>
                             </div>
 
@@ -39,14 +39,14 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label">رقم الهاتف  </label>
                                 <div class="col-sm-10">
-                                    <input required type="number" class="form-control"  value="{{$clinic->phone}}" name="phone">
+                                    <input required type="number" class="form-control"  value="{{$item->phone}}" name="phone">
                                 </div>
                             </div>
 
                              <div class="form-group row">
                                 <label class="col-sm-2 control-label">البريد الالكتروني</label>
                                 <div class="col-sm-10">
-                                    <input required type="email" class="form-control" value="{{$user->email}}" name="email">
+                                    <input required type="email" class="form-control" value="{{$item->user->email}}" name="email">
                                     <span class="small" style="color: red">هذا الحقل خاص  بعملية تسجيل الدخول </span>
 
                                 </div>

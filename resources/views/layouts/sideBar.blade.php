@@ -40,10 +40,10 @@
                             </a>
                         </li> --}}
 
-                        {{-- clinic --}}
-
-                        <li class="nav-item has-treeview  @yield('sections_open')">
-                            <a href="#" class="nav-link @yield('sections')">
+                        {{-- hospital --}}
+                        @if (auth()->user()->role =='admin')
+                        <li class="nav-item has-treeview  @yield('hospital_open')">
+                            <a href="#" class="nav-link @yield('hospital')">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 المستشفيات
@@ -52,13 +52,13 @@
                             </a>
                             <ul class="nav nav-treeview" >
                                 <li class="nav-item">
-                                    <a href="{{route('clinic.index')}}" class="nav-link @yield('clinic_index')">
+                                    <a href="{{route('hospital.index')}}" class="nav-link @yield('hospital_index')">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>كل المستشفيات</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('clinic.create')}}" class="nav-link @yield('clinic_create')">
+                                    <a href="{{route('hospital.create')}}" class="nav-link @yield('hospital_create')">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>إضافة مستشفى جديد</p>
                                     </a>
@@ -66,6 +66,63 @@
 
                             </ul>
                         </li>
+                        {{-- specialies --}}
+                        <li class="nav-item has-treeview  @yield('specialies_open')">
+                            <a href="#" class="nav-link @yield('specialies')">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                التخصصات
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                            </a>
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item">
+                                    <a href="{{route('specialies.index')}}" class="nav-link @yield('specialies_index')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>كل التخصصات</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('specialies.create')}}" class="nav-link @yield('specialies_create')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>إضافة تخصص جديد</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        @endif
+
+
+
+                        @if (auth()->user()->role =='hospital')
+
+                        {{-- doctor --}}
+                        <li class="nav-item has-treeview  @yield('doctor_open')">
+                            <a href="#" class="nav-link @yield('doctor')">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                الاطباء
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                            </a>
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item">
+                                    <a href="{{route('doctor.index')}}" class="nav-link @yield('doctor_index')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>كل الاطباء</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('doctor.create')}}" class="nav-link @yield('doctor_create')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>إضافة طبيب جديد</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        @endif
 
 
 

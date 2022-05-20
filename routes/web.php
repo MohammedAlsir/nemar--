@@ -46,5 +46,7 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
     //               الاعدادات العامة
     //************************************************
 
-    route::resource('clinic', 'ClinicController');
+    route::resource('hospital', 'HospitalController')->middleware('admin');
+    route::resource('specialies', 'SpecialiesController')->middleware('admin');
+    route::resource('doctor', 'DoctorController')->middleware('hospital');
 });

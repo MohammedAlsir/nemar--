@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title','إضافة مستشفى جديد')
-@section('clinic_open','menu-open')
-@section('clinic','active')
-@section('clinic_create','active')
+@section('hospital_open','menu-open')
+@section('hospital','active')
+@section('hospital_create','active')
 @section('content')
 
 <section class="content">
@@ -17,20 +17,20 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="POST" action="{{route('clinic.store')}}" class="form-horizontal">
+                    <form method="POST" action="{{route('hospital.store')}}" class="form-horizontal">
                         @csrf
                         <div class="card-body">
 
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label">اسم المستشفى  </label>
                                 <div class="col-sm-10">
-                                    <input required type="text" class="form-control" name="clinic_name">
+                                    <input required type="text" class="form-control" name="name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label">العنوان</label>
                                 <div class="col-sm-10">
-                                    <input required type="text" class="form-control" name="Address">
+                                    <input required type="text" class="form-control" name="location">
                                 </div>
                             </div>
 

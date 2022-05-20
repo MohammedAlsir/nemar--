@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title','كل المستشفيات')
-@section('clinic_open','menu-open')
-@section('clinic','active')
-@section('clinic_index','active')
+@section('title','كل الاطباء')
+@section('doctor_open','menu-open')
+@section('doctor','active')
+@section('doctor_index','active')
 
 
 
@@ -14,7 +14,7 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">بيانات كل المستشفيات</h3>
+              <h3 class="card-title">بيانات كل الاطباء</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -22,26 +22,37 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>اسم المستشفى </th>
-                  <th>العنوان</th>
+                  <th>اسم الطبيب </th>
+                  <th>الصورة</th>
+                  <th> المستشفى </th>
+                  <th>التخصص</th>
+                  <th>العمر</th>
                   <th>رقم الهاتف</th>
+                  {{-- <th>حول </th> --}}
+                  <th>سعر الكشف</th>
                   <th>العمليات</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($clinic as $item)
+                    @foreach ($collection as $item)
                         <tr>
                             <td>{{$index++}}</td>
-                            <td>{{$item->clinic_name}}</td>
-                            <td>{{$item->Address}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>
+                                <img style="width: 50px; height: 50px; object-fit: cover;"  src="{{asset('uploads/doctors/'.$item->photo)}}"  srcset="">
+                            </td>
+                            <td>{{$item->hospital->name}}</td>
+                            <td>{{$item->specialties->name}}</td>
+                            <td>{{ 2022 - $item->birth}}</td>
                             <td>{{$item->phone}}</td>
+                            <td>{{number_format($item->price)}}</td>
                             {{-- <td>{{$item->products->count()}}</td> --}}
                             <td>
                                 <div>
-                                    <form  action="{{route('clinic.destroy',$item->id)}}" method="POST">
+                                    <form  action="{{route('doctor.destroy',$item->id)}}" method="POST">
                                         {{ csrf_field()}}
                                         {{ method_field('delete') }}
-                                        <a href="{{route('clinic.edit',$item->id)}}" class="btn btn-primary"> تعديل</a>
+                                        <a href="{{route('doctor.edit',$item->id)}}" class="btn btn-primary"> تعديل</a>
                                         <button type="submit" class="show_confirm  btn btn-danger"></i>&nbsp; حذف</button>
                                     </form>
                                 </div>

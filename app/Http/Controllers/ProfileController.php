@@ -12,10 +12,10 @@ use Illuminate\Validation\Rule;
 // use RealRashid\SweetAlert\Facades\Alert;
 // or
 // use Alert;
-// 
+//
 class ProfileController extends Controller
 {
-    // مسار تخزين الصور الشخصية 
+    // مسار تخزين الصور الشخصية
     private $uploadPath = "uploads/users/";
 
     // عرض صفحة البروفايل
@@ -46,7 +46,7 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        // حفظ الصورة الشخصية 
+        // حفظ الصورة الشخصية
         $formFile = "photo";
         $fileFinalName = "";
         if ($request->$formFile != "") {
