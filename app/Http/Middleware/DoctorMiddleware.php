@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorMiddleware
 {
@@ -16,6 +18,12 @@ class DoctorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if (!Auth::user()) {
+            return redirect(RouteServiceProvider::HOME);
+        } elseif (Auth::user()->role == 'doctor') {
+            return $next($request);
+        } else {
+            abort(404);
+        }
     }
 }

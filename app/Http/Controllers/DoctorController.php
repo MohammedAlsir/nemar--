@@ -9,6 +9,7 @@ use App\Models\Specialties;
 use App\Models\User;
 use App\Traits\Oprations;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -25,7 +26,11 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        return $this->index_data(Doctor::class, 'doctor.index');
+        // return $this->index_data(Doctor::class, 'doctor.index');
+        $index = 1;
+        $hospital = Hospital::where('user_id', Auth::user()->id)->first();
+        $collection = Doctor::where('hospital_id', $hospital->id)->orderBy('id', 'DESC')->get();
+        return view('doctor.index', compact('collection', 'index'));
     }
 
     /**
@@ -59,9 +64,11 @@ class DoctorController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
+        $hospital = Hospital::where('user_id', Auth::user()->id)->first();
+
         $doctor = new Doctor();
         $doctor->name = $request->name;
-        $doctor->hospital_id = $request->hospital_id;
+        $doctor->hospital_id = $hospital->id;
         $doctor->specialtie_id = $request->specialtie_id;
         $doctor->birth = $request->birth;
         $doctor->phone = $request->phone;
@@ -147,8 +154,11 @@ class DoctorController extends Controller
         }
         $user->save();
 
+        $hospital = Hospital::where('user_id', Auth::user()->id)->first();
+
         $doctor->name = $request->name;
-        $doctor->hospital_id = $request->hospital_id;
+        $doctor->hospital_id = $hospital->id;
+
         $doctor->specialtie_id = $request->specialtie_id;
         $doctor->birth = $request->birth;
         $doctor->phone = $request->phone;

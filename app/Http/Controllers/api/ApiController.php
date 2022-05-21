@@ -282,9 +282,10 @@ class ApiController extends Controller
         if (auth()->user()->role == 'sick') {
             $all_reservation = Reservation::where('patient_id', $id)->orderBy('id', 'desc')->get();
 
-            // foreach ($users as $user) {
-            //     $user->setAttribute('added_at', $user->created_at->diffForHumans());
-            // }
+            foreach ($all_reservation as $item) {
+                $item->setAttribute('doctor', $item->doctor);
+                $item->setAttribute('patient', $item->patient);
+            }
 
             return response()->json([
                 'all_reservation' => $all_reservation,

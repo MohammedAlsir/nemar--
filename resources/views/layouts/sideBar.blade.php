@@ -97,7 +97,6 @@
 
 
                         @if (auth()->user()->role =='hospital')
-
                         {{-- doctor --}}
                         <li class="nav-item has-treeview  @yield('doctor_open')">
                             <a href="#" class="nav-link @yield('doctor')">
@@ -118,6 +117,35 @@
                                     <a href="{{route('doctor.create')}}" class="nav-link @yield('doctor_create')">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>إضافة طبيب جديد</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        @endif
+
+
+                        @if (auth()->user()->role =='doctor')
+                        {{-- doctor --}}
+                        <li class="nav-item has-treeview  @yield('reservations_open')">
+                            <a href="#" class="nav-link @yield('reservations')">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                الكشوفات
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                            </a>
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item">
+                                    <a href="{{route('reservations.index')}}" class="nav-link @yield('reservations_index')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>كل الكشوفات</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('reservations.new')}}" class="nav-link @yield('reservations_create')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>الكشوفات الجديدة</p>
                                     </a>
                                 </li>
 

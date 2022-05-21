@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->string('status')->default(0);
             $table->string('date')->nullable();
             $table->string('diagnosis')->nullable();
             $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');

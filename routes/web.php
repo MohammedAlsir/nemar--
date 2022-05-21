@@ -49,4 +49,7 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
     route::resource('hospital', 'HospitalController')->middleware('admin');
     route::resource('specialies', 'SpecialiesController')->middleware('admin');
     route::resource('doctor', 'DoctorController')->middleware('hospital');
+
+    route::resource('reservations', 'ReservationsController')->middleware('doctor');
+    route::get('new/reservations', 'ReservationsController@new')->name('reservations.new')->middleware('doctor');
 });
