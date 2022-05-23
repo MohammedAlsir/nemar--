@@ -251,21 +251,30 @@ class ApiController extends Controller
                 'doctor_id' => 'required',
                 'date' => 'required',
             ]);
+            $check = Reservation::where('doctor_id', $request->doctor_id)->where('date', $request->date)->count();
+            if ($check == 10) {
+                return response()->json([
+                    'error'     => true,
+                    'message_en'   => '',
+                    'message_ar'   => 'عفوا ، تم اكتمال عدد الحجوزات لهذا الطبيب',
+                ], 200);
+            } else {
 
-            $reservation = new Reservation();
-            $reservation->patient_id = $request->patient_id;
-            $reservation->doctor_id = $request->doctor_id;
-            $reservation->date = $request->date;
+                $reservation = new Reservation();
+                $reservation->patient_id = $request->patient_id;
+                $reservation->doctor_id = $request->doctor_id;
+                $reservation->date = $request->date;
 
-            $reservation->save();
+                $reservation->save();
 
 
-            return response()->json([
-                'reservation' => $reservation,
-                'error' => false,
-                'message_en' => '',
-                'message_ar' => ''
-            ], 200);
+                return response()->json([
+                    'reservation' => $reservation,
+                    'error' => false,
+                    'message_en' => '',
+                    'message_ar' => ''
+                ], 200);
+            }
         } else {
             return response()->json([
                 'error'     => true,
