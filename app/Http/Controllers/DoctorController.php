@@ -7,6 +7,7 @@ use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Specialties;
 use App\Models\User;
+use App\Models\WorkTime;
 use App\Traits\Oprations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,13 +93,22 @@ class DoctorController extends Controller
             $request->file($formFile)->move($path, $fileFinalName);
         }
 
-
         if ($fileFinalName != "") {
             $doctor->photo = $fileFinalName;
         }
-
-
         $doctor->save();
+
+        foreach ($request->day as $index => $day) {
+            // $loop->index
+            if ($request->from[$index] != '' && $request->to[$index] != '') {
+                $days = new WorkTime();
+                $days->day  = $day;
+                $days->from = $request->from[$index];
+                $days->to  = $request->to[$index];
+                $days->doctor_id = $doctor->id;
+                $days->save();
+            }
+        }
 
         toast('تم الاضافة بنجاح', 'success');
         return redirect()->route('doctor.index');
@@ -123,7 +133,29 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        return $this->edit_data_with_two_model(Doctor::class, $id, Hospital::class, Specialties::class, 'doctor.edit');
+        $st = WorkTime::where('doctor_id', $id);
+        $sun = WorkTime::where('doctor_id', $id);
+        $mon = WorkTime::where('doctor_id', $id);
+        $tue = WorkTime::where('doctor_id', $id);
+        $wed = WorkTime::where('doctor_id', $id);
+        $thu = WorkTime::where('doctor_id', $id);
+        $fri = WorkTime::where('doctor_id', $id);
+
+        $item = Doctor::find($id);
+        $model_1 = Hospital::orderBy('id', 'DESC')->get();
+        $model_2 = Specialties::orderBy('id', 'DESC')->get();
+        return view('doctor.edit', compact(
+            'item',
+            'model_1',
+            'model_2',
+            'st',
+            'sun',
+            'mon',
+            'tue',
+            'wed',
+            'thu',
+            'fri',
+        ));
     }
 
     /**
@@ -189,6 +221,19 @@ class DoctorController extends Controller
 
 
         $doctor->save();
+
+        WorkTime::where('doctor_id', $id)->delete();
+        foreach ($request->day as $index => $day) {
+            // $loop->index
+            if ($request->from[$index] != '' && $request->to[$index] != '') {
+                $days = new WorkTime();
+                $days->day  = $day;
+                $days->from = $request->from[$index];
+                $days->to  = $request->to[$index];
+                $days->doctor_id = $doctor->id;
+                $days->save();
+            }
+        }
 
         toast('تم التعديل  بنجاح', 'success');
         return redirect()->route('doctor.index');

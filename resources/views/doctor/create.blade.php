@@ -100,7 +100,7 @@
                                 </div>
                             </div>
 
-                             <div class="form-group row">
+                            <div class="form-group row">
                                 <label class="col-sm-2 control-label">البريد الالكتروني</label>
                                 <div class="col-sm-10">
                                     <input required type="email" class="form-control" name="email">
@@ -120,6 +120,110 @@
 
 
                             <!-- /.card-body -->
+                            <div class="card-footer">
+                                <h4>ايام العمل </h4>
+                            </div>
+
+                            {{-- السبت --}}
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">السبت</label>
+                                <label class="col-sm-1 control-label">من</label>
+                                <div class="col-sm-3">
+                                    <input  type="hidden" class="form-control" value="السبت" name="day[]">
+                                    <input  type="time" class="form-control" name="from[]">
+                                </div>
+                                <label class="col-sm-1 control-label">الي</label>
+                                <div class="col-sm-3">
+                                    <input  type="time" class="form-control" name="to[]">
+                                </div>
+                            </div>
+
+                            {{-- الاحد --}}
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">الاحد</label>
+                                <label class="col-sm-1 control-label">من</label>
+                                <div class="col-sm-3">
+                                    <input  type="hidden" class="form-control" value="الاحد" name="day[]">
+                                    <input  type="time" class="form-control" name="from[]">
+                                </div>
+                                <label class="col-sm-1 control-label">الي</label>
+                                <div class="col-sm-3">
+                                    <input  type="time" class="form-control" name="to[]">
+                                </div>
+                            </div>
+
+                            {{-- الاثنين --}}
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">الاثنين</label>
+                                <label class="col-sm-1 control-label">من</label>
+                                <div class="col-sm-3">
+                                    <input  type="hidden" class="form-control" value="الاثنين" name="day[]">
+                                    <input  type="time" class="form-control" name="from[]">
+                                </div>
+                                <label class="col-sm-1 control-label">الي</label>
+                                <div class="col-sm-3">
+                                    <input  type="time" class="form-control" name="to[]">
+                                </div>
+                            </div>
+
+                            {{-- الثلاثاء --}}
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">الثلاثاء</label>
+                                <label class="col-sm-1 control-label">من</label>
+                                <div class="col-sm-3">
+                                    <input  type="hidden" class="form-control" value="الثلاثاء" name="day[]">
+                                    <input  type="time" class="form-control" name="from[]">
+                                </div>
+                                <label class="col-sm-1 control-label">الي</label>
+                                <div class="col-sm-3">
+                                    <input  type="time" class="form-control" name="to[]">
+                                </div>
+                            </div>
+
+                            {{-- الاربعاء --}}
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">الاربعاء</label>
+                                <label class="col-sm-1 control-label">من</label>
+                                <div class="col-sm-3">
+                                    <input  type="hidden" class="form-control" value="الاربعاء" name="day[]">
+                                    <input  type="time" class="form-control" name="from[]">
+                                </div>
+                                <label class="col-sm-1 control-label">الي</label>
+                                <div class="col-sm-3">
+                                    <input  type="time" class="form-control" name="to[]">
+                                </div>
+                            </div>
+
+                            {{-- الخميس --}}
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">الخميس</label>
+                                <label class="col-sm-1 control-label">من</label>
+                                <div class="col-sm-3">
+                                    <input  type="hidden" class="form-control" value="الخميس" name="day[]">
+                                    <input  type="time" class="form-control" name="from[]">
+                                </div>
+                                <label class="col-sm-1 control-label">الي</label>
+                                <div class="col-sm-3">
+                                    <input  type="time" class="form-control" name="to[]">
+                                </div>
+                            </div>
+
+                            {{-- الجمعة --}}
+                            <div class="form-group row">
+                                <label class="col-sm-2 control-label">الجمعة</label>
+                                <label class="col-sm-1 control-label">من</label>
+                                <div class="col-sm-3">
+                                    <input  type="hidden" class="form-control" value="الجمعة" name="day[]">
+                                    <input  type="time" class="form-control" name="from[]">
+                                </div>
+                                <label class="col-sm-1 control-label">الي</label>
+                                <div class="col-sm-3">
+                                    <input  type="time" class="form-control" name="to[]">
+                                </div>
+                            </div>
+
+
+
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-block btn-info">اضافة</button>
                             </div>

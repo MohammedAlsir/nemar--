@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('work_times', function (Blueprint $table) {
             $table->id();
-            $table->string('status')->default(0);
-            $table->string('date')->nullable();
-            $table->string('diagnosis')->nullable();
-            $table->string('order_number')->nullable();
             $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
-            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
-
+            $table->string('day');
+            $table->string('from');
+            $table->string('to');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('work_times');
     }
 };

@@ -218,7 +218,7 @@ class ApiController extends Controller
     {
         //
         if (auth()->user()->role == 'sick') {
-            $doctor = Doctor::where('hospital_id', $hospital)->where('specialtie_id', $specialties)->orderBy('id', 'desc')->get();
+            $doctor = Doctor::with('work_time')->where('hospital_id', $hospital)->where('specialtie_id', $specialties)->orderBy('id', 'desc')->get();
 
             // foreach ($users as $user) {
             //     $user->setAttribute('added_at', $user->created_at->diffForHumans());
@@ -252,6 +252,7 @@ class ApiController extends Controller
                 'date' => 'required',
             ]);
             $check = Reservation::where('doctor_id', $request->doctor_id)->where('date', $request->date)->count();
+            $number = Reservation::where('doctor_id', $request->doctor_id)->where('date', $request->date)->get();
             if ($check == 10) {
                 return response()->json([
                     'error'     => true,
@@ -264,6 +265,12 @@ class ApiController extends Controller
                 $reservation->patient_id = $request->patient_id;
                 $reservation->doctor_id = $request->doctor_id;
                 $reservation->date = $request->date;
+                if ($number->count() > 0) {
+                    $last = Reservation::where('doctor_id', $request->doctor_id)->where('date', $request->date)->orderBy('id', 'DESC')->first();
+                    $reservation->order_number     = $last->order_number + 1;
+                } else {
+                    $reservation->order_number     = 1;
+                }
 
                 $reservation->save();
 
